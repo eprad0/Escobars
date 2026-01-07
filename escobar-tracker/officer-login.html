@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Escobar Tracker — Officer Login</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container row">
+      <div>
+        <h1>Officer Login</h1>
+        <p class="muted">Login + officer code → officer portal</p>
+      </div>
+      <div class="right">
+        <a class="btn btn-ghost" href="index.html">Back</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div id="msg" class="msg hidden"></div>
+
+      <form id="officerLoginForm" class="stack">
+        <label>
+          Username
+          <input id="username" autocomplete="username" required />
+        </label>
+        <label>
+          Password
+          <input id="password" type="password" autocomplete="current-password" required />
+        </label>
+        <label>
+          Officer code (shared)
+          <input id="code" type="password" required placeholder="shared code" />
+        </label>
+
+        <button class="btn btn-primary" type="submit">Enter officer portal</button>
+      </form>
+
+      <p class="muted small">
+        Officers still must be listed in Firestore <code>officers</code> collection (see README).
+      </p>
+    </div>
+  </main>
+
+  <script type="module" src="js/officer-login.js"></script>
+</body>
+</html>

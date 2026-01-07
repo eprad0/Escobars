@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Escobar Tracker — Officer Portal</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container row">
+      <div>
+        <h1>Officer Portal</h1>
+        <p id="whoami" class="muted"></p>
+      </div>
+      <div class="right row gap">
+        <a class="btn btn-ghost" href="portal.html">Student portal</a>
+        <button id="logoutBtn" class="btn">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container grid">
+    <section class="card">
+      <h2>Send announcement</h2>
+      <div id="annMsg" class="msg hidden"></div>
+      <form id="annForm" class="stack">
+        <label>
+          Title
+          <input id="annTitle" required placeholder="e.g. Clean-up schedule" />
+        </label>
+        <label>
+          Message
+          <textarea id="annBody" rows="4" required placeholder="Announcement text"></textarea>
+        </label>
+        <button class="btn btn-primary" type="submit">Post announcement</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Spend requests</h2>
+      <div id="reqMsg" class="msg hidden"></div>
+      <div id="spendRequests" class="list muted">Loading…</div>
+    </section>
+
+    <section class="card">
+      <h2>Accounts</h2>
+      <div class="row gap">
+        <input id="search" placeholder="Search username…" />
+        <button id="refreshBtn" class="btn">Refresh</button>
+      </div>
+      <div id="accounts" class="list muted">Loading…</div>
+    </section>
+
+    <section class="card">
+      <h2>Adjust escobars</h2>
+      <div id="adjMsg" class="msg hidden"></div>
+      <form id="adjustForm" class="stack">
+        <label>
+          Select user
+          <select id="userSelect" required></select>
+        </label>
+        <label>
+          Action
+          <select id="action" required>
+            <option value="add">Add</option>
+            <option value="deduct">Deduct</option>
+          </select>
+        </label>
+        <label>
+          Amount
+          <input id="amount" type="number" min="1" step="1" required />
+        </label>
+        <label>
+          Reason
+          <input id="reason" required placeholder="e.g. cleaning, late, helping, etc." />
+        </label>
+        <button class="btn btn-primary" type="submit">Apply</button>
+      </form>
+      <p class="muted small">This writes a dated log to the student account.</p>
+    </section>
+  </main>
+
+  <script type="module" src="js/officer.js"></script>
+</body>
+</html>

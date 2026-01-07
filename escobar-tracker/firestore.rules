@@ -1,0 +1,58 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOfficer() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/officers/$(request.auth.uid))
+        && get(/databases/$(database)/documents/officers/$(request.auth.uid)).data.enabled == true;
+    }
+
+    match /users/{uid} {
+      allow create: if signedIn() && request.auth.uid == uid;
+
+      // Officers can read everyone; users can read themselves only if not disabled
+      allow read: if (signedIn() && request.auth.uid == uid && resource.data.disabled != true) || isOfficer();
+
+      // Officers can update; users can only update if they don't change balance/disabled
+      allow update: if isOfficer()
+        || (signedIn()
+            && request.auth.uid == uid
+            && request.resource.data.balance == resource.data.balance
+            && request.resource.data.disabled == resource.data.disabled);
+
+      allow delete: if isOfficer();
+
+      match /logs/{logId} {
+        allow read: if (signedIn() && request.auth.uid == uid) || isOfficer();
+        allow create: if isOfficer();
+        allow update, delete: if false;
+      }
+    }
+
+    match /announcements/{id} {
+      allow read: if true;
+      allow create, update, delete: if isOfficer();
+    }
+
+    match /spendRequests/{id} {
+      allow read: if signedIn()
+        && (resource.data.uid == request.auth.uid || isOfficer());
+
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid;
+
+      allow update, delete: if isOfficer();
+    }
+
+    // officers list is managed in the console
+    match /officers/{uid} {
+      allow read: if isOfficer();
+      allow write: if false;
+    }
+  }
+}

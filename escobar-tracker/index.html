@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Escobar Tracker — Login</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <h1>Escobar Tracker</h1>
+      <p class="muted">Class incentive currency tracker</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div class="row gap">
+        <button id="tabLogin" class="btn">Login</button>
+        <button id="tabSignup" class="btn btn-secondary">Sign up</button>
+        <a class="btn btn-ghost right" href="officer-login.html">Officer login</a>
+      </div>
+
+      <div id="msg" class="msg hidden"></div>
+
+      <section id="loginPanel" class="panel">
+        <h2>Login</h2>
+        <form id="loginForm" class="stack">
+          <label>
+            Username
+            <input id="loginUsername" autocomplete="username" required placeholder="e.g. janedoe" />
+          </label>
+          <label>
+            Password
+            <input id="loginPassword" type="password" autocomplete="current-password" required />
+          </label>
+          <button class="btn btn-primary" type="submit">Login</button>
+        </form>
+      </section>
+
+      <section id="signupPanel" class="panel hidden">
+        <h2>Create account</h2>
+        <form id="signupForm" class="stack">
+          <label>
+            Username
+            <input id="signupUsername" autocomplete="username" required placeholder="letters/numbers/._ only" />
+          </label>
+          <label>
+            Password
+            <input id="signupPassword" type="password" autocomplete="new-password" required minlength="6" />
+          </label>
+          <button class="btn btn-primary" type="submit">Create account</button>
+          <p class="muted small">Password must be at least 6 characters (Firebase rule).</p>
+        </form>
+      </section>
+    </div>
+
+    <p class="muted small">
+      Tip: If modules don’t load when you open the file directly, use a local server (see README).
+    </p>
+  </main>
+
+  <script type="module" src="js/index.js"></script>
+</body>
+</html>
+portal.html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Escobar Tracker — Portal</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container row">
+      <div>
+        <h1>Student Portal</h1>
+        <p id="welcome" class="muted"></p>
+      </div>
+      <div class="right row gap">
+        <a class="btn btn-ghost" href="officer-login.html">Officer login</a>
+        <button id="logoutBtn" class="btn">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container grid">
+    <section class="card">
+      <h2>Balance</h2>
+      <div class="big-number"><span id="balance">—</span> escobars</div>
+      <p class="muted small">Balance updates when officers add/deduct or approve spend requests.</p>
+    </section>
+
+    <section class="card">
+      <h2>Spend escobars (request)</h2>
+      <div id="spendMsg" class="msg hidden"></div>
+      <form id="spendForm" class="stack">
+        <label>
+          Amount to spend
+          <input id="spendAmount" type="number" min="1" step="1" required />
+        </label>
+        <label>
+          Reason / Item
+          <textarea id="spendReason" rows="3" required placeholder="e.g. buy snacks / privilege / item"></textarea>
+        </label>
+        <button class="btn btn-primary" type="submit">Send request to officers</button>
+      </form>
+      <hr />
+      <h3>Your spend requests</h3>
+      <div id="requests" class="list muted">Loading…</div>
+    </section>
+
+    <section class="card">
+      <h2>Announcements</h2>
+      <div id="announcements" class="list muted">Loading…</div>
+    </section>
+
+    <section class="card">
+      <h2>Your escobar logs</h2>
+      <div id="logs" class="list muted">Loading…</div>
+    </section>
+  </main>
+
+  <script type="module" src="js/portal.js"></script>
+</body>
+</html>
