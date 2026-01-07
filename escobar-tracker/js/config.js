@@ -9,12 +9,6 @@ const firebaseConfig = {
   appId: "1:164794964142:web:a96991184dca5b14fdf53f"
 };
 
-export const firebaseConfig = {
-  apiKey: "PASTE_ME",
-  authDomain: "PASTE_ME",
-  projectId: "PASTE_ME",
-  appId: "PASTE_ME",
-};
 
 // 2) Simple shared code (not encrypted on purpose — this is just a “gate”)
 export const OFFICER_PORTAL_CODE = "1234"; // change this
